@@ -1,6 +1,6 @@
 package main
 
-import "github.com/rohanchauhna02/cogniterm/internals/app"
+import "github.com/rohanchauhna02/cogai/internals/app"
 
 
 func main(){

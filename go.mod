@@ -1,4 +1,4 @@
-module github.com/rohanchauhna02/cogniterm
+module github.com/rohanchauhna02/cogai
 
 go 1.22
 
