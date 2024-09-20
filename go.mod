@@ -1,4 +1,4 @@
-module github.com/rohanchauhna02/cogai
+module github.com/rohanchauhan02/cogai
 
 go 1.22
 

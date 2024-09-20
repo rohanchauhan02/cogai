@@ -1,6 +1,6 @@
 package main
 
-import "github.com/rohanchauhna02/cogai/internals/app"
+import "github.com/rohanchauhan02/cogai/internals/app"
 
 
 func main(){
