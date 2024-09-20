@@ -1,4 +1,4 @@
-# CogAI (A blend of "Cognitive" and "AI," representing intelligence and smart processin)
+# CogAI (A blend of Cognitive and AI representing intelligence and smart processin)
 
 **CogAI** is an AI-powered CLI tool designed to streamline your Go development experience. Built specifically for GoLang enthusiasts, CogniTerm assists developers by automating repository creation, package management, and project structuring. Leveraging the power of AI, it intelligently suggests and implements Go packages based on your project needs, ensuring optimized performance and clean architecture.
 
