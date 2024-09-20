@@ -1,6 +1,8 @@
 package main
 
+import "github.com/rohanchauhna02/cogniterm/internals/app"
+
 
 func main(){
-	println("Hello World")
+	app.Init()
 }
