@@ -31,3 +31,6 @@ cogai <command>
 ```
 
 ### Commands
+
+- `set OPEN_AI_KEY=XXXXXXX`: Add openai key to env file
+- `delete -k/--key open_ai_key(or OPEN_AI_KEY)`: Create a new repository
