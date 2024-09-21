@@ -11,5 +11,6 @@ func Init() {
 	rootCmd.AddCommand(info.InfoCmd)
 	rootCmd.AddCommand(env.ExportCmd)
 	rootCmd.AddCommand(env.DeleteCmd)
+	rootCmd.AddCommand(env.GetEnv)
 	rootCmd.Execute()
 }
