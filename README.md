@@ -35,7 +35,7 @@ cogai <command>
 
 - `cogai init`: Initiate cogai.
 
-[![cogai init](https://github.com/cogai/cogai/blob/main/docs/cogai-init.png)](https://github.com/cogai/cogai/blob/main/docs/cogai-init.png)
+[cogai init](https://github.com/rohanchauhan02/cogai/docs/logo.png)
 
 #### `Get disk info`
 
