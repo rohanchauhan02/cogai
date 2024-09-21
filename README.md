@@ -34,21 +34,8 @@ cogai <command>
 #### `Initiate CogAI`
 
 - `cogai init`: Initiate cogai.
-`
-   ____    _____     ______       ____      ___
-  / ___|  / ___ \   / _____|     / /\ \     | |
- | |     | |   | | | |    _     / /__\ \    | |
- | |___  | |___| | | |___| |   / /----\ \   | |
-  \____|  \_____/   \____|_|  |_|      |_|  |_|
 
-
-                Version 0.0.1
-       Copyright (c) 2024 Rohan Chauhan
-        <singhrohankumar7@gmail.com>
-
-      CogAI: AI-Driven Command-Line Tool.
-`
-
+[![cogai init](https://github.com/cogai/cogai/blob/main/docs/cogai-init.png)](https://github.com/cogai/cogai/blob/main/docs/cogai-init.png)
 
 #### `Get disk info`
 
