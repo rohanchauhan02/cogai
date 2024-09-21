@@ -1,6 +1,7 @@
 package app
 
 import (
+	"github.com/rohanchauhan02/cogai/internals/modules/create"
 	"github.com/rohanchauhan02/cogai/internals/modules/env"
 	"github.com/rohanchauhan02/cogai/internals/modules/info"
 	"github.com/rohanchauhan02/cogai/internals/pkg/cmd"
@@ -8,6 +9,7 @@ import (
 
 func Init() {
 	rootCmd := cmd.NewCmd()
+	rootCmd.AddCommand(create.CreateCmd)
 	rootCmd.AddCommand(info.InfoCmd)
 	rootCmd.AddCommand(env.ExportCmd)
 	rootCmd.AddCommand(env.DeleteCmd)

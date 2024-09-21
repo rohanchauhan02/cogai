@@ -19,13 +19,13 @@ var (
 				return
 			}
 			arguments := strings.Split(args[0], "=")
-			saveAPIKey(arguments[0], arguments[1])
+			SaveAPIKey(arguments[0], arguments[1])
 		},
 	}
 	filePath = "app.config.yml"
 )
 
-func saveAPIKey(key, value string) {
+func SaveAPIKey(key, value string) {
 	config := make(map[string]string)
 	key = strings.ToUpper(key)
 	DeleteEnvVar(key, false)
