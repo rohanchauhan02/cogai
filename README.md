@@ -10,3 +10,24 @@ With **CogAI**, you can:
 - Benefit from AI-driven insights for enhancing code quality and efficiency.
 
 Whether you're a seasoned Go developer or just starting, **CogAI** provides the support you need to accelerate development with minimal effort.
+
+
+## How to Use
+
+### Installation
+
+To install CogAI, simply run the following command:
+
+```bash
+go install github.com/cogai/cogai@latest
+```
+
+### Usage
+
+To use CogAI, simply run the following command:
+
+```bash
+cogai <command>
+```
+
+### Commands
