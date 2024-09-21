@@ -11,7 +11,6 @@ With **CogAI**, you can:
 
 Whether you're a seasoned Go developer or just starting, **CogAI** provides the support you need to accelerate development with minimal effort.
 
-
 ## How to Use
 
 ### Installation
@@ -31,6 +30,12 @@ cogai <command>
 ```
 
 ### Commands
+
+#### `Get disk info`
+
+- `info du`: Get disk info.
+
+#### `Env Management`
 
 - `set OPEN_AI_KEY=XXXXXXX`: Add openai key to env file.
 - `delete -k/--key open_ai_key(or OPEN_AI_KEY)`: Delete the key from env file.
