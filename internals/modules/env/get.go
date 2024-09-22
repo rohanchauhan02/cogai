@@ -44,7 +44,11 @@ var (
 func GetKey(key string, hide bool) string {
 	// Check if config file exists
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
-		fmt.Println("Error: config file not found")
+		if hide {
+			fmt.Println("Error: config file not found")
+			return ""
+		}
+
 		return ""
 	}
 

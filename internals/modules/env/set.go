@@ -46,7 +46,6 @@ func SaveAPIKey(key, value string) {
 		DeleteEnvVar(key, false)
 	}
 	config[key] = value
-
 	data, err := yaml.Marshal(&config)
 	if err != nil {
 		fmt.Println("Error marshaling YAML:", err)
