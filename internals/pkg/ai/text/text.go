@@ -19,7 +19,7 @@ var (
 	exitInstructions = "\nPress ctrl+c to exit, ⌃ for scroll up and ⌄ for scroll down."
 
 	// Set the maximum width for the response box
-	maxWidth = 200
+	maxWidth = 80
 )
 
 const responseHeight = 100 // Number of lines to show in the response box
