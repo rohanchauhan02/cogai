@@ -32,8 +32,8 @@ var Logo = `
 
 // Define red and yellow styles using lipgloss
 var (
-	RedStyle    = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF0000")) // Red color
-	YellowStyle = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFFF00")) // Yellow color
+	RedStyle    = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#1303fc")) // Red color
+	YellowStyle = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#fc4903")) // Yellow color
 )
 
 // CreateCmd is the main command for initializing CogAI
