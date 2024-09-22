@@ -16,10 +16,10 @@ var (
 	responseStyle    = lipgloss.NewStyle().Foreground(lipgloss.Color("#ADFF2F"))
 	borderStyle      = lipgloss.NewStyle().Border(lipgloss.NormalBorder()).Padding(1).Margin(1)
 	boxStyle         = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).Padding(1).Margin(1)
-	exitInstructions = "\nPress ctrl+c to exit."
+	exitInstructions = "\nPress ctrl+c to exit, ⌃ for scroll up and ⌄ for scroll down."
 
 	// Set the maximum width for the response box
-	maxWidth = 80
+	maxWidth = 200
 )
 
 const responseHeight = 100 // Number of lines to show in the response box
@@ -38,8 +38,6 @@ func TextAIInputModel(modelName string) TextAIModel {
 	ti.Placeholder = "Ask a question or enter code..."
 	ti.PlaceholderStyle = placeHolderStyle
 	ti.Focus()
-	// ti// Enable multi-line input
-	// ti.Height = 3       // Adjust the height for input
 	return TextAIModel{
 		textInput: ti,
 		modelName: modelName,
