@@ -116,7 +116,7 @@ func (m TextAIModel) View() string {
 	}
 
 	// Box for the input prompt, without extra space
-	inputBox := boxStyle.Render(inputStyle.Render("Please ask a question") + "\n" + m.textInput.View())
+	inputBox := boxStyle.Render(inputStyle.Render("Please ask a question:") + "\n" + m.textInput.View())
 
 	// Combine the response and input box
 	output += inputBox + "\n"
