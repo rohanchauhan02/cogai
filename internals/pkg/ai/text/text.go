@@ -20,7 +20,7 @@ var (
 	exitInstructions = "\nPress ctrl+c to exit, ⌃ for scroll up and ⌄ for scroll down."
 
 	// Set the maximum width for the response box
-	maxWidth = 80
+	maxWidth = 100
 )
 
 const responseHeight = 10 // Number of lines to show in the response box
@@ -28,7 +28,6 @@ const responseHeight = 10 // Number of lines to show in the response box
 type TextAIModel struct {
 	textInput     textinput.Model
 	modelName     string
-	response      string
 	scrollOffset  int
 	responseLines []string
 	isMultiline   bool
@@ -37,7 +36,7 @@ type TextAIModel struct {
 // TextAIInputModel initializes the text input model
 func TextAIInputModel(modelName string) TextAIModel {
 	ti := textinput.New()
-	ti.Placeholder = "Ask a question or enter code..."
+	ti.Placeholder = "Ask a anything..."
 	ti.PlaceholderStyle = placeHolderStyle
 	ti.Focus()
 	return TextAIModel{
@@ -117,7 +116,7 @@ func (m TextAIModel) View() string {
 	}
 
 	// Box for the input prompt, without extra space
-	inputBox := boxStyle.Render(inputStyle.Render("Please ask a question or enter code:") + "\n" + m.textInput.View())
+	inputBox := boxStyle.Render(inputStyle.Render("Please ask a question") + "\n" + m.textInput.View())
 
 	// Combine the response and input box
 	output += inputBox + "\n"
