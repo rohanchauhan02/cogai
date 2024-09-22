@@ -22,7 +22,7 @@ var (
 	maxWidth = 80
 )
 
-const responseHeight = 10 // Number of lines to show in the response box
+const responseHeight = 100 // Number of lines to show in the response box
 
 type TextAIModel struct {
 	textInput     textinput.Model
