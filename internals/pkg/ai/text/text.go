@@ -23,7 +23,7 @@ var (
 	maxWidth = 80
 )
 
-const responseHeight = 100 // Number of lines to show in the response box
+const responseHeight = 10 // Number of lines to show in the response box
 
 type TextAIModel struct {
 	textInput     textinput.Model
@@ -31,6 +31,7 @@ type TextAIModel struct {
 	response      string
 	scrollOffset  int
 	responseLines []string
+	isMultiline   bool
 }
 
 // TextAIInputModel initializes the text input model
@@ -55,35 +56,43 @@ func (m TextAIModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmd tea.Cmd
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
-		switch msg.Type {
-		case tea.KeyEnter:
-			value := strings.TrimSpace(m.textInput.Value())
-			if value != "" {
-				// Get the response
-				response, err := utils.AskChatGPT(value)
-				if err != nil {
-					fmt.Println("Error:", err)
-					return m, tea.Quit
+		switch msg.String() {
+		case "enter":
+			// If we're in multi-line mode, allow "Enter" to insert a newline
+			if m.isMultiline {
+				m.textInput.SetValue(m.textInput.Value() + "\n")
+			} else {
+				// Handle the input submission
+				value := strings.TrimSpace(m.textInput.Value())
+				if value != "" {
+					response, err := utils.AskChatGPT(value)
+					if err != nil {
+						// Clear input after error
+						m.textInput.SetValue("")
+						m.responseLines = wrapText(fmt.Sprintf("Error: %v", err), maxWidth)
+						return m, nil
+					}
+					// Process successful response
+					m.responseLines = wrapText(response, maxWidth)
+					m.scrollOffset = 0
+					m.textInput.SetValue("") // Clear input field after success
 				}
-
-				// Split the response into lines for scrolling and wrapping
-				m.responseLines = wrapText(response, maxWidth)
-				m.scrollOffset = 0 // Reset scroll offset
-				m.response = response
-				m.textInput.SetValue("") // Clear input field
-				return m, nil
 			}
-		case tea.KeyUp:
+		case "shift+enter":
+			// Toggle multi-line input mode
+			m.isMultiline = true
+			m.textInput.SetValue(m.textInput.Value() + "\n")
+		case "up":
+			// Scroll up in the response
 			if m.scrollOffset > 0 {
 				m.scrollOffset--
 			}
-		case tea.KeyDown:
+		case "down":
+			// Scroll down in the response
 			if m.scrollOffset < len(m.responseLines)-responseHeight {
 				m.scrollOffset++
 			}
-		}
-		switch msg.String() {
-		case "ctrl+c", "q":
+		case "ctrl+c":
 			return m, tea.Quit
 		}
 	}
@@ -91,7 +100,6 @@ func (m TextAIModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, cmd
 }
 
-// View displays the text input and response view
 // View displays the text input and response view
 func (m TextAIModel) View() string {
 	var output string
@@ -119,7 +127,6 @@ func (m TextAIModel) View() string {
 
 	return output
 }
-
 
 // formatResponse formats the response, identifying code blocks
 func formatResponse(response string) string {
@@ -151,7 +158,6 @@ func formatResponse(response string) string {
 
 	return strings.Join(formattedLines, "\n")
 }
-
 
 // wrapText wraps the given text into lines of specified width
 func wrapText(text string, width int) []string {

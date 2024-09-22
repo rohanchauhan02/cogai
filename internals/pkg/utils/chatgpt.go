@@ -3,11 +3,28 @@ package utils
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
 
 	"github.com/rohanchauhan02/cogai/internals/modules/env"
 )
+
+type ChatGPTError struct {
+	Message string `json:"message"`
+	Type    string `json:"type"`
+	Param   string `json:"param,omitempty"`
+	Code    string `json:"code"`
+}
+
+type ChatGPTResponse struct {
+	Choices []struct {
+		Message struct {
+			Content string `json:"content"`
+		} `json:"message"`
+	} `json:"choices"`
+	Error ChatGPTError `json:"error,omitempty"`
+}
 
 func AskChatGPT(prompt string) (string, error) {
 	url := "https://api.openai.com/v1/chat/completions"
@@ -48,14 +65,21 @@ func AskChatGPT(prompt string) (string, error) {
 		return "", err
 	}
 
-	var result map[string]interface{}
+	var result ChatGPTResponse
 	if err := json.Unmarshal(body, &result); err != nil {
 		return "", err
 	}
 
-	// Extract the message content
-	choices := result["choices"].([]interface{})
-	message := choices[0].(map[string]interface{})["message"].(map[string]interface{})["content"].(string)
+	// Handle potential error in response
+	if result.Error.Message != "" {
+		return "", errors.New(result.Error.Message)
+	}
 
-	return message, nil
+	// Extract the message content from the choices
+	if len(result.Choices) > 0 {
+		message := result.Choices[0].Message.Content
+		return message, nil
+	}
+
+	return "", errors.New("no response from ChatGPT")
 }
