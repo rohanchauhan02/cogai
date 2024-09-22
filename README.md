@@ -18,7 +18,7 @@ Whether you're a seasoned Go developer or just starting, **CogAI** provides the 
 To install CogAI, simply run the following command:
 
 ```bash
-go install github.com/cogai/cogai@latest
+go install github.com/cogai/cogai@v0.0.1
 ```
 
 ### Usage
