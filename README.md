@@ -37,6 +37,14 @@ cogai <command>
 
 ![CogAI](https://github.com/rohanchauhan02/cogai/blob/master/docs/logo.png)
 
+### Ask CogAI
+
+- `cogai ask "What is the meaning of life?"`: Ask CogAI a question.
+- `cogai ask  -i`: Ask CogAI a question with interactive mode.
+
+![CogAI interective shell](https://github.com/rohanchauhan02/cogai/blob/master/docs/demo1.png)
+![CogAI interective shell](https://github.com/rohanchauhan02/cogai/blob/master/docs/demo2.png)
+
 #### `Get disk info`
 
 - `info du`: Get disk info.
