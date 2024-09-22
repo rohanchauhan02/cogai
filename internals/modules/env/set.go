@@ -27,17 +27,30 @@ var (
 
 func SaveAPIKey(key, value string) {
 	config := make(map[string]string)
-	key = strings.ToUpper(key)
-	DeleteEnvVar(key, false)
+	// create if not exists
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		os.Create(filePath)
+	} else {
+		// read the config file
+		data, err := os.ReadFile(filePath)
+		if err != nil {
+			fmt.Println("Error reading config file:", err)
+			return
+		}
+		err = yaml.Unmarshal(data, &config)
+		if err != nil {
+			fmt.Println("Error unmarshalling config:", err)
+			return
+		}
+		key = strings.ToUpper(key)
+		DeleteEnvVar(key, false)
+	}
 	config[key] = value
+
 	data, err := yaml.Marshal(&config)
 	if err != nil {
 		fmt.Println("Error marshaling YAML:", err)
 		return
-	}
-	// create if not exists
-	if _, err := os.Stat(filePath); os.IsNotExist(err) {
-		os.Create(filePath)
 	}
 	// Permissions for security
 	err = os.WriteFile(filePath, data, 0600)

@@ -35,42 +35,45 @@ var (
 			}
 
 			// Retrieve the specific key from the configuration
-			getKey(key)
+			GetKey(key, false)
 		},
 	}
 )
 
 // Retrieve a specific key from the config file
-func getKey(key string) {
+func GetKey(key string, hide bool) string {
 	// Check if config file exists
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
 		fmt.Println("Error: config file not found")
-		return
+		return ""
 	}
 
 	// Read the config file
 	data, err := os.ReadFile(filePath)
 	if err != nil {
 		fmt.Println("Error reading config file:", err)
-		return
+		return ""
 	}
 
 	// Unmarshal the YAML data
 	var config map[string]string
 	if err := yaml.Unmarshal(data, &config); err != nil {
 		fmt.Println("Error unmarshalling config:", err)
-		return
+		return ""
 	}
 
 	// Check if the requested key exists
 	value, ok := config[key]
 	if !ok {
 		fmt.Println("Error: key not found")
-		return
+		return ""
 	}
 
 	// Print the key's value
-	fmt.Println(value)
+	if !hide {
+		fmt.Printf("%s: %s\n", key, value)
+	}
+	return value
 }
 
 // Retrieve all keys from the config file

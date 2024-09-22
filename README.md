@@ -37,7 +37,6 @@ cogai <command>
 
 ![CogAI](https://github.com/rohanchauhan02/cogai/blob/master/docs/logo.png)
 
-
 #### `Get disk info`
 
 - `info du`: Get disk info.

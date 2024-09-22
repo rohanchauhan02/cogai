@@ -15,8 +15,9 @@ type model struct {
 
 func InitialModel() model {
 	return model{
-		choices:  []string{"ChatGPT-4", "Google Gemini"},
+		choices:  []string{"ChatGPT-4o", "Google Gemini"},
 		selected: make(map[int]struct{}),
+		cursor:   0,
 	}
 }
 
@@ -42,7 +43,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "enter", " ":
 			// Select the model and proceed to get the API key
 			modelSelected := m.choices[m.cursor]
-			fmt.Printf("You selected: %s\n", modelSelected)
+			// fmt.Printf("You selected: %s\n", modelSelected)
 			return text.TextInputModel(modelSelected), nil
 		}
 	}
@@ -62,6 +63,6 @@ func (m model) View() string {
 		}
 		s += fmt.Sprintf("%s [%s] %s\n", cursor, checked, choice)
 	}
-	s += "\nPress 'q' to exit and 'Enter' to select a model.\n"
+	s += "\nPress 'ctrl+c' or 'q' to exit and 'Enter' to select a model.\n"
 	return s
 }
