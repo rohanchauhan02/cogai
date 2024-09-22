@@ -14,6 +14,7 @@ var (
 	placeHolderStyle = lipgloss.NewStyle().Italic(true).Foreground(lipgloss.Color("240"))
 	inputStyle       = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#00BFFF"))
 	responseStyle    = lipgloss.NewStyle().Foreground(lipgloss.Color("#ADFF2F"))
+	codeStyle        = lipgloss.NewStyle().Background(lipgloss.Color("#1E1E1E")).Foreground(lipgloss.Color("#C5C5C5")).Padding(1)
 	borderStyle      = lipgloss.NewStyle().Border(lipgloss.NormalBorder()).Padding(1).Margin(1)
 	boxStyle         = lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).Padding(1).Margin(1)
 	exitInstructions = "\nPress ctrl+c to exit, ⌃ for scroll up and ⌄ for scroll down."
@@ -91,6 +92,7 @@ func (m TextAIModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 // View displays the text input and response view
+// View displays the text input and response view
 func (m TextAIModel) View() string {
 	var output string
 
@@ -102,12 +104,12 @@ func (m TextAIModel) View() string {
 			end = len(m.responseLines)
 		}
 
-		responseContent := strings.Join(m.responseLines[start:end], "\n")
-		output += borderStyle.Render(responseStyle.Render("AI Response:")+"\n"+responseContent) + "\n"
+		responseContent := formatResponse(strings.Join(m.responseLines[start:end], "\n"))
+		output += borderStyle.Render(responseStyle.Render("AI Response:") + "\n" + responseContent) + "\n"
 	}
 
-	// Box for the input prompt
-	inputBox := boxStyle.Render(inputStyle.Render("Please ask a question or enter code:\n") + m.textInput.View())
+	// Box for the input prompt, without extra space
+	inputBox := boxStyle.Render(inputStyle.Render("Please ask a question or enter code:") + "\n" + m.textInput.View())
 
 	// Combine the response and input box
 	output += inputBox + "\n"
@@ -117,6 +119,39 @@ func (m TextAIModel) View() string {
 
 	return output
 }
+
+
+// formatResponse formats the response, identifying code blocks
+func formatResponse(response string) string {
+	lines := strings.Split(response, "\n")
+	var formattedLines []string
+
+	inCodeBlock := false
+	for _, line := range lines {
+		if strings.HasPrefix(line, "```") {
+			inCodeBlock = !inCodeBlock // Toggle code block state
+			if inCodeBlock {
+				formattedLines = append(formattedLines, codeStyle.Render("")) // Start code block
+			} else {
+				formattedLines = append(formattedLines, "") // End code block
+			}
+		} else if inCodeBlock {
+			// Indent code lines for better visibility
+			formattedLines = append(formattedLines, codeStyle.Render(line))
+		} else {
+			// Regular text line, include it without special handling
+			formattedLines = append(formattedLines, line)
+		}
+	}
+
+	// Ensure we add a final line if we're still in a code block
+	if inCodeBlock {
+		formattedLines = append(formattedLines, "") // Close the code block
+	}
+
+	return strings.Join(formattedLines, "\n")
+}
+
 
 // wrapText wraps the given text into lines of specified width
 func wrapText(text string, width int) []string {
