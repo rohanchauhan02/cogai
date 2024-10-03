@@ -26,28 +26,28 @@ func NewCmd() ICmd {
 				if len(args) == 0 {
 					// provide the version and all about the CLI tool
 					fmt.Println(`
-						CogAI: AI-Enabled CLI Tool
+CogAI: AI-Enabled CLI Tool
 
-						CogAI is an advanced command-line interface (CLI) tool powered by OpenAI, enabling intelligent interactions to answer your queries with insightful responses. Built with GoLang, CogAI streamlines communication with AI for efficient, real-time solutions.
+CogAI is an advanced command-line interface (CLI) tool powered by OpenAI, enabling intelligent interactions to answer your queries with insightful responses. Built with GoLang, CogAI streamlines communication with AI for efficient, real-time solutions.
 
-						Version: 0.0.1
-						Author: Rohan Chauhan
-						GitHub: https://github.com/rohanchauhna02/cogai
-						License: MIT
+Version: 0.0.1
+Author: Rohan Chauhan
+GitHub: https://github.com/rohanchauhna02/cogai
+License: MIT
 
-						Usage:
-							cogai [command] [options]
+Usage:
+	cogai [command] [options]
 
-						Commands:
-							ask        - Submit a question for AI to answer
-							ask <question>  - Ask a specific question
-							help       - Display available commands and usage information
-							help <command>  - Get detailed help for a specific command
-							version    - Display the current version of CogAI
-							version <command> - Show version information for a specific command
+Commands:
+	ask        - Submit a question for AI to answer
+	ask <question>  - Ask a specific question
+	help       - Display available commands and usage information
+	help <command>  - Get detailed help for a specific command
+	version    - Display the current version of CogAI
+	version <command> - Show version information for a specific command
 
-						Examples:
-							cogai ask "What is the meaning of life?"
+Examples:
+	cogai ask "What is the meaning of life?"
 					`)
 
 					return
