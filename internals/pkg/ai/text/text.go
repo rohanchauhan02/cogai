@@ -36,7 +36,7 @@ type TextAIModel struct {
 // TextAIInputModel initializes the text input model
 func TextAIInputModel(modelName string) TextAIModel {
 	ti := textinput.New()
-	ti.Placeholder = "Ask a anything..."
+	ti.Placeholder = "Ask anything..."
 	ti.PlaceholderStyle = placeHolderStyle
 	ti.Focus()
 	return TextAIModel{

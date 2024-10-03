@@ -20,7 +20,7 @@ var Logo = `
  | |___  | |___| | | |___| |   / /----\ \   | |
   \____|  \_____/   \____|_|  |_|      |_|  |_|
 
-                          ...COGNATIVE AI ENGNE
+                          ...COGNITIVE AI ENGNE
 
 
                 Version 0.0.1
