@@ -3,6 +3,7 @@ package env
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -42,8 +43,15 @@ var (
 
 // Retrieve a specific key from the config file
 func GetKey(key string, hide bool) string {
+	// Get the absolute path of the config file
+	absPath, err := filepath.Abs(filePath)
+	if err != nil {
+		fmt.Println("Error resolving absolute file path:", err)
+		return ""
+	}
+
 	// Check if config file exists
-	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+	if _, err := os.Stat(absPath); os.IsNotExist(err) {
 		if hide {
 			fmt.Println("Error: config file not found")
 			return ""
@@ -53,7 +61,7 @@ func GetKey(key string, hide bool) string {
 	}
 
 	// Read the config file
-	data, err := os.ReadFile(filePath)
+	data, err := os.ReadFile(absPath)
 	if err != nil {
 		fmt.Println("Error reading config file:", err)
 		return ""

@@ -40,6 +40,8 @@ var (
 			} else if len(args) > 0 {
 				// Process the direct question
 				question := strings.Join(args, " ")
+				// get the default model
+				
 				response, err := utils.AskChatGPT(question)
 				if err != nil {
 					fmt.Println("Error:", err)
